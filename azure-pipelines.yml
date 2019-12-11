@@ -1,0 +1,29 @@
+# Gradle
+# Build your Java project and run tests with Gradle using a Gradle wrapper script.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/java
+
+trigger:
+- master
+
+variables:
+  appPackaging: squeeze
+
+jobs:
+  # MacOS
+  - template: src/main/pipeline/build-job.yml
+    parameters:
+      name: MacOS
+      platform: mac
+      appPackaging: $(appPackaging)
+      pool:
+        vmImage: 'macOS-latest'
+
+  # Linux
+  - template: src/main/pipeline/build-job.yml
+    parameters:
+      name: Linux
+      platform: linux
+      appPackaging: $(appPackaging)
+      pool:
+        vmImage: 'ubuntu-latest'
