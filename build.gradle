@@ -37,16 +37,10 @@ jlink {
     }
 }
 
-run {
-    if (project.hasProperty('args')) {
-        args project.args.split(',')
-        System.out.println(args)
-    }
-}
-
 task dist {
-    dependsOn clean, jlinkZip
-    description "Cleans and jlinkZip [default]"
+    dependsOn clean, jlink
+    description "Cleans and jlink [default]"
 }
 
-defaultTasks 'dist'
+defaultTasks 'jlink'
+
